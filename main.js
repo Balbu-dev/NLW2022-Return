@@ -1,9 +1,26 @@
-function onScroll() {
+window.addEventListener('scroll', onScroll)
+
+onScroll()
+
+function showNavOnScroll() {
   if (scrollY == 0) {
     navigation.classList.remove('scroll')
   } else {
     navigation.classList.add('scroll')
   }
+}
+
+function showBackToTopButtonOnScroll() {
+  if (scrollY <= 400) {
+    backToTopButton.classList.remove('show')
+  } else {
+    backToTopButton.classList.add('show')
+  }
+}
+
+function onScroll() {
+  showNavOnScroll()
+  showBackToTopButtonOnScroll()
 }
 
 function openMenu() {
