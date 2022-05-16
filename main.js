@@ -21,6 +21,30 @@ function showBackToTopButtonOnScroll() {
 function onScroll() {
   showNavOnScroll()
   showBackToTopButtonOnScroll()
+
+  activateMenuAtCurrentSection(home)
+  activateMenuAtCurrentSection(services)
+  activateMenuAtCurrentSection(about)
+}
+
+function activateMenuAtCurrentSection(section) {
+  const sectionTop = section.offsetTop
+  const sectionHeight = section.offsetHeight
+  const sectionId = section.getAttribute('id')
+  const menuElement = document.querySelector(`.menu a[href*=${sectionId}]`)
+
+  const targetLine = scrollY + innerHeight / 2
+  const sectionEndsAt = sectionTop + sectionHeight
+  const sectionTopReachOrPassedTargetLine = targetLine >= sectionTop
+  const sectionEndPassedTargetLine = sectionEndsAt <= targetLine
+  const sectionBoundaries =
+    sectionTopReachOrPassedTargetLine && !sectionEndPassedTargetLine
+
+  if (sectionBoundaries) {
+    menuElement.classList.add('active')
+  } else {
+    menuElement.classList.remove('active')
+  }
 }
 
 function openMenu() {
